@@ -50,6 +50,13 @@ public class WordSearch{
 
      */
     public boolean addWordHorizontal(String word,int row, int col){
+      if (word.length() + col > data[0].length){
+        return false
+      }
+      for (int i = 0; i < word.length(); i ++){
+        data[row][col + i] = word.charAt(i);
+      }
+      return true;
     }
 
 
@@ -66,6 +73,12 @@ public class WordSearch{
 
      */
     public boolean addWordVertical(String word,int row, int col){
+      if (word.length() + row > data.length){
+        return false;
+      }
+      for (int i = 0; i < word.length(); i ++){
+        data[row + i][col] = word.charAt(i);
+      }
+      return true;
     }
-
 }
