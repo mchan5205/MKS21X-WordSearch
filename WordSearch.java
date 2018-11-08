@@ -25,6 +25,14 @@ public class WordSearch{
      *separated by newlines.
      */
     public String toString(){
+      String y = "";
+      for (int i = 0; i < data.length; i ++){
+        for (int x = 0; x < data.length; x ++){
+          y += data[x][i] + " ";
+        }
+        y += "\n";
+      }
+      return y;
     }
 
 
