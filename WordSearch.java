@@ -99,10 +99,10 @@ public class WordSearch{
     public boolean addWordDiagonal(String word, int row, int col){
       if (word.length() + row > data.length || word.length() + col > data[0].length){
         return false;
-        for (int i = 0; i < word.length(); i ++){
-          if (Character.isLetter(data[row + i][col + i]) && (! (data[row + i][col + i] == word.charAt(i)))){
-            return false;
-          }
+      }
+      for (int i = 0; i < word.length(); i ++){
+        if (Character.isLetter(data[row + i][col + i]) && (! (data[row + i][col + i] == word.charAt(i)))){
+          return false;
         }
       }
       for (int i = 0; i < word.length(); i ++){
