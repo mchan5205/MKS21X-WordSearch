@@ -1,12 +1,16 @@
+import java.util.random;
+import java.util.scanner;
+import java.util.arraylist;
+import java.io.filenotfoundexception;
+import java.io.file;
+
 public class WordSearch{
     private char[][]data;
+    private int seed;
+    private Random randgen;
+    private ArrayList<String>wordsToAdd;
+    private ArrayList<String>wordsAdded;
 
-    /**Initialize the grid to the size specified
-
-     *and fill all of the positions with '_'
-     *@param row is the starting height of the WordSearch
-     *@param col is the starting width of the WordSearch
-     */
     public WordSearch(int rows,int cols){
       data = new char[rows][cols];
       for (int i = 0; i < rows; i ++){
@@ -110,4 +114,33 @@ public class WordSearch{
       }
       return true;
     }
+  private boolean addWord(String word, int r, int c, int rowIncrement, int colIncrement){
+    if (c + word.length() * colIncrement > data[0].length || c + word.length() * colIncrement < 0 && r + word.length() * rowIncrement > data.length || r + word.length() * rowIncrement < 0){
+      return false;
+    }
+    if (rowIncrement == 0 && colIncrement == 0){
+      return false;
+    }
+    for (int i = 0; i < word.length(); i ++){
+      if (Character.isLetter(data[r + rowIncrement * i][c + colIncrement * i]) && (! (data[r + rowIncrement * i][c + colIncrement * i] == word.charAt(i)))){
+        return false;
+      }
+    }
+    for (int i = 0; i < word.length(); i ++){
+      data[r + rowIncrement * i][c + colIncrement * i] = word.charAt(i);
+    }
+    return true;
+  }
+  public String toString(){
+    String newstr = "";
+    for (int i = 0; i < data.length; i ++){
+      newstr += "|";
+      for (int x = 0; x < data[i].length; x ++){
+        newstr += data[i][x];
+      }
+      newstr += "|\n";
+    }
+    newstr += "Words: " +
+    return newstr
+  }
 }
