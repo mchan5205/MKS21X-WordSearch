@@ -61,20 +61,6 @@ public class WordSearch{
       return newstr;
     }
 
-    public boolean addWordDiagonal(String word, int row, int col){
-      if (word.length() + row > data.length || word.length() + col > data[0].length){
-        return false;
-      }
-      for (int i = 0; i < word.length(); i ++){
-        if (Character.isLetter(data[row + i][col + i]) && (! (data[row + i][col + i] == word.charAt(i)))){
-          return false;
-        }
-      }
-      for (int i = 0; i < word.length(); i ++){
-        data[row + i][col + i] = word.charAt(i);
-      }
-      return true;
-    }
     private boolean addWord(String word, int r, int c, int rowIncrement, int colIncrement){
       if (c + word.length() * colIncrement > data[0].length || c + word.length() * colIncrement < 0 && r + word.length() * rowIncrement > data.length || r + word.length() * rowIncrement < 0){
         return false;
