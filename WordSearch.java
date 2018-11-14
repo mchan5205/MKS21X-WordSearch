@@ -11,30 +11,10 @@ public class WordSearch{
     private ArrayList<String> wordsToAdd;
     private ArrayList<String> wordsAdded;
 
-    public WordSearch(int rows,int cols){
-      data = new char[rows][cols];
-      clear();
-    }
-
-    public WordSearch(int rows, int cols, String fileName) throws FileNotFoundException{
+    public WordSearch(int rows, int cols, String fileName, int randSeed, boolean answers) throws FileNotFoundException{
       data = new char[rows][cols];
       wordsToAdd = new ArrayList<>();
-      clear();
-      try{
-        File f = new File(fileName);
-        Scanner words = new Scanner(f);
-        while(words.hasNext()){
-          wordsToAdd.add(words.nextLine());
-        }
-      }
-      catch(FileNotFoundException e){
-        System.out.println("File not found: " + fileName);
-        System.exit(1);
-      }
-    }
-    public WordSearch(int rows, int cols, String fileName, int randSeed) throws FileNotFoundException{
-      data = new char[rows][cols];
-      wordsToAdd = new ArrayList<>();
+      wordsAdded = new ArrayList<>();
       clear();
       try{
         File f = new File(fileName);
@@ -71,37 +51,6 @@ public class WordSearch{
       return newstr;
     }
 
-
-    public boolean addWordHorizontal(String word,int row, int col){
-      if (word.length() + col > data[0].length){
-        return false;
-      }
-      for (int i = 0; i < word.length(); i ++){
-        if (Character.isLetter(data[row][col + i]) && (! (data[row][col + i] == word.charAt(i)))){
-          return false;
-        }
-      }
-      for (int i = 0; i < word.length(); i ++){
-        data[row][col + i] = word.charAt(i);
-      }
-      return true;
-    }
-
-
-    public boolean addWordVertical(String word,int row, int col){
-      if (word.length() + row > data.length){
-        return false;
-      }
-      for (int i = 0; i < word.length(); i ++){
-        if (Character.isLetter(data[row + i][col]) && (! (data[row + i][col] == word.charAt(i)))){
-          return false;
-        }
-      }
-      for (int i = 0; i < word.length(); i ++){
-        data[row + i][col] = word.charAt(i);
-      }
-      return true;
-    }
     public boolean addWordDiagonal(String word, int row, int col){
       if (word.length() + row > data.length || word.length() + col > data[0].length){
         return false;
@@ -134,6 +83,31 @@ public class WordSearch{
       return true;
     }
     private void addAllWords(){
-      
+      String next = wordsToAdd.get(randgen.nextInt() % wordsToAdd.size());
+      int colInc = randgen.nextInt() % 2;
+      int rowInc = randgen.nextInt() % 2;
+      int i = 0;
+      while (wordsToAdd.size() > 0){
+          if (addWord(next, randgen.nextInt() % data.length, randgen.nextInt() % data[0].length, rowInc, colInc){
+            wordsAdded.add(next);
+            wordsToAdd.remove(next);
+            if (wordsToAdd.size() > 0){
+              next = wordsToAdd.get(randgen.nextInt() % wordsToAdd.size();
+              colInc = randgen.nextInt() % 2;
+              rowInc = randgen.nextInt() % 2;
+              i = 0;
+            }
+          }
+          i += 1;
+          if (i > 1000){
+            if (wordsToAdd.size() > 0){
+              next = wordsToAdd.get(randgen.nextInt() % wordsToAdd.size()
+              colInc = randgen.nextInt() % 2;
+              rowInc = randgen.nextInt() % 2;
+              i = 0;
+            }
+          }
+        }
+      }
     }
 }
