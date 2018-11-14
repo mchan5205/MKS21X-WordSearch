@@ -32,6 +32,24 @@ public class WordSearch{
         System.exit(1);
       }
     }
+    public WordSearch(int rows, int cols, String fileName, int randSeed) throws FileNotFoundException{
+      data = new char[rows][cols];
+      wordsToAdd = new ArrayList<>();
+      clear();
+      try{
+        File f = new File(fileName);
+        Scanner words = new Scanner(f);
+        while(words.hasNext()){
+          wordsToAdd.add(words.nextLine());
+        }
+      }
+      catch(FileNotFoundException e){
+        System.out.println("File not found: " + fileName);
+        System.exit(1);
+      }
+      randgen = new Random(randSeed);
+    }
+
     private void clear(){
       for (int i = 0; i < data.length; i ++){
         for (int x = 0; x < data[i].length; x ++){
@@ -116,6 +134,6 @@ public class WordSearch{
       return true;
     }
     private void addAllWords(){
-
+      
     }
 }
