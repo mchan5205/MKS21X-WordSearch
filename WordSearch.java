@@ -1,26 +1,37 @@
-import java.util.random;
-import java.util.scanner;
-import java.util.arraylist;
-import java.io.filenotfoundexception;
-import java.io.file;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.FileNotFoundException;
+import java.io.File;
 
 public class WordSearch{
-    private char[][]data;
+    private char[][] data;
     private int seed;
     private Random randgen;
-    private ArrayList<String>wordsToAdd;
-    private ArrayList<String>wordsAdded;
+    private ArrayList<String> wordsToAdd;
+    private ArrayList<String> wordsAdded;
 
     public WordSearch(int rows,int cols){
       data = new char[rows][cols];
-      for (int i = 0; i < rows; i ++){
-        for (int x = 0; x < cols; x ++){
-          data[i][x] = '_';
-        }
-      }
+      clear();
     }
 
-    /**Set all values in the WordSearch to underscores'_'*/
+    public WordSearch(int rows, int cols, String fileName) throws FileNotFoundException{
+      data = new char[rows][cols];
+      wordsToAdd = new ArrayList<>();
+      clear();
+      try{
+        File f = new File(fileName);
+        Scanner words = new Scanner(f);
+        while(words.hasNext()){
+          wordsToAdd.add(words.nextLine());
+        }
+      }
+      catch(FileNotFoundException e){
+        System.out.println("File not found: " + fileName);
+        System.exit(1);
+      }
+    }
     private void clear(){
       for (int i = 0; i < data.length; i ++){
         for (int x = 0; x < data[i].length; x ++){
@@ -29,35 +40,20 @@ public class WordSearch{
       }
     }
 
-    /**Each row is a new line, there is a space between each letter
-     *@return a String with each character separated by spaces, and rows
-     *separated by newlines.
-     */
     public String toString(){
-      String y = "";
+      String newstr = "";
       for (int i = 0; i < data.length; i ++){
+        newstr += "|";
         for (int x = 0; x < data[i].length; x ++){
-          y += data[i][x] + " ";
+          newstr += data[i][x];
         }
-        y += "\n";
+        newstr += "|\n";
       }
-      return y;
+      newstr += "Words: ";
+      return newstr;
     }
 
 
-    /**Attempts to add a given word to the specified position of the WordGrid.
-     *The word is added from left to right, must fit on the WordGrid, and must
-     *have a corresponding letter to match any letters that it overlaps.
-     *
-     *@param word is any text to be added to the word grid.
-     *@param row is the vertical locaiton of where you want the word to start.
-     *@param col is the horizontal location of where you want the word to start.
-     *@return true when the word is added successfully. When the word doesn't fit,
-     * or there are overlapping letters that do not match, then false is returned
-
-     * and the board is NOT modified.
-
-     */
     public boolean addWordHorizontal(String word,int row, int col){
       if (word.length() + col > data[0].length){
         return false;
@@ -74,18 +70,6 @@ public class WordSearch{
     }
 
 
-   /**Attempts to add a given word to the specified position of the WordGrid.
-     *The word is added from top to bottom, must fit on the WordGrid, and must
-     *have a corresponding letter to match any letters that it overlaps.
-     *
-     *@param word is any text to be added to the word grid.
-     *@param row is the vertical locaiton of where you want the word to start.
-     *@param col is the horizontal location of where you want the word to start.
-     *@return true when the word is added successfully. When the word doesn't fit,
-     *or there are overlapping letters that do not match, then false is returned.
-     *and the board is NOT modified.
-
-     */
     public boolean addWordVertical(String word,int row, int col){
       if (word.length() + row > data.length){
         return false;
@@ -114,33 +98,24 @@ public class WordSearch{
       }
       return true;
     }
-  private boolean addWord(String word, int r, int c, int rowIncrement, int colIncrement){
-    if (c + word.length() * colIncrement > data[0].length || c + word.length() * colIncrement < 0 && r + word.length() * rowIncrement > data.length || r + word.length() * rowIncrement < 0){
-      return false;
-    }
-    if (rowIncrement == 0 && colIncrement == 0){
-      return false;
-    }
-    for (int i = 0; i < word.length(); i ++){
-      if (Character.isLetter(data[r + rowIncrement * i][c + colIncrement * i]) && (! (data[r + rowIncrement * i][c + colIncrement * i] == word.charAt(i)))){
+    private boolean addWord(String word, int r, int c, int rowIncrement, int colIncrement){
+      if (c + word.length() * colIncrement > data[0].length || c + word.length() * colIncrement < 0 && r + word.length() * rowIncrement > data.length || r + word.length() * rowIncrement < 0){
         return false;
       }
-    }
-    for (int i = 0; i < word.length(); i ++){
-      data[r + rowIncrement * i][c + colIncrement * i] = word.charAt(i);
-    }
-    return true;
-  }
-  public String toString(){
-    String newstr = "";
-    for (int i = 0; i < data.length; i ++){
-      newstr += "|";
-      for (int x = 0; x < data[i].length; x ++){
-        newstr += data[i][x];
+      if (rowIncrement == 0 && colIncrement == 0){
+        return false;
       }
-      newstr += "|\n";
+      for (int i = 0; i < word.length(); i ++){
+        if (Character.isLetter(data[r + rowIncrement * i][c + colIncrement * i]) && (! (data[r + rowIncrement * i][c + colIncrement * i] == word.charAt(i)))){
+          return false;
+        }
+      }
+      for (int i = 0; i < word.length(); i ++){
+        data[r + rowIncrement * i][c + colIncrement * i] = word.charAt(i);
+      }
+      return true;
     }
-    newstr += "Words: " +
-    return newstr
-  }
+    private void addAllWords(){
+
+    }
 }
