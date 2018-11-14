@@ -28,6 +28,16 @@ public class WordSearch{
         System.exit(1);
       }
       randgen = new Random(randSeed);
+      addAllWords();
+      if (! answers){
+        for (int i = 0; i < data.length; i ++){
+          for (int x = 0; x < data[0].length; x ++){
+            if (! Character.isLetter(data[i][x])){
+              data[i][x] = Character (randgen.nextInt() % 26 + 'a');
+            }
+          }
+        }
+      }
     }
 
     private void clear(){
