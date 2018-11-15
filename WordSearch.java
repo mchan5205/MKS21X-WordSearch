@@ -33,7 +33,7 @@ public class WordSearch{
         for (int i = 0; i < data.length; i ++){
           for (int x = 0; x < data[0].length; x ++){
             if (! Character.isLetter(data[i][x])){
-              data[i][x] = Character (randgen.nextInt() % 26 + 'a');
+              data[i][x] = (char)(randgen.nextInt() % 26 + 'a');
             }
           }
         }
@@ -58,6 +58,13 @@ public class WordSearch{
         newstr += "|\n";
       }
       newstr += "Words: ";
+      for (int i = 0; i < wordsAdded.size(); i ++){
+        newstr += wordsAdded.get(i);
+        if (i < wordsAdded.size() - 1){
+          newstr += ", ";
+        }
+      }
+      newstr += "(seed: " + seed + ")";
       return newstr;
     }
 
@@ -84,11 +91,11 @@ public class WordSearch{
       int rowInc = randgen.nextInt() % 2;
       int i = 0;
       while (wordsToAdd.size() > 0){
-          if (addWord(next, randgen.nextInt() % data.length, randgen.nextInt() % data[0].length, rowInc, colInc){
+          if (addWord(next, randgen.nextInt() % data.length, randgen.nextInt() % data[0].length, rowInc, colInc)){
             wordsAdded.add(next);
             wordsToAdd.remove(next);
             if (wordsToAdd.size() > 0){
-              next = wordsToAdd.get(randgen.nextInt() % wordsToAdd.size();
+              next = wordsToAdd.get(randgen.nextInt() % wordsToAdd.size());
               colInc = randgen.nextInt() % 2;
               rowInc = randgen.nextInt() % 2;
               i = 0;
@@ -97,13 +104,12 @@ public class WordSearch{
           i += 1;
           if (i > 1000){
             if (wordsToAdd.size() > 0){
-              next = wordsToAdd.get(randgen.nextInt() % wordsToAdd.size()
+              next = wordsToAdd.get(randgen.nextInt() % wordsToAdd.size());
               colInc = randgen.nextInt() % 2;
               rowInc = randgen.nextInt() % 2;
               i = 0;
             }
           }
-        }
       }
     }
 }
