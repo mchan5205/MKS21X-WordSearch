@@ -1,0 +1,7 @@
+bird
+giraffe
+monkey
+dog
+frog
+cow
+kangaroo

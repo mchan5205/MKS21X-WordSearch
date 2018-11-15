@@ -11,10 +11,33 @@ public class WordSearch{
     private ArrayList<String> wordsToAdd;
     private ArrayList<String> wordsAdded;
 
+    public static void main(String[] args){
+      if (args.length > 3){
+        System.out.println("use java WordSearch rows cols filename randomSeed answers");
+        System.out.println("randomSeed and answers is optional");
+      }
+      try{
+        if (args.length > 4){
+            Random y = new Random();
+            WordSearch x = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], y.nextInt(), false);
+          }
+          if (args.length > 5){
+            WordSearch x = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
+          }
+          if (args.length > 6){
+            WordSearch x = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), true);
+          }
+      }
+      catch(FileNotFoundException e){
+        System.out.println("File not found")
+      }
+  }
+
     public WordSearch(int rows, int cols, String fileName, int randSeed, boolean answers) throws FileNotFoundException{
       data = new char[rows][cols];
       wordsToAdd = new ArrayList<>();
       wordsAdded = new ArrayList<>();
+      seed = randSeed;
       clear();
       try{
         File f = new File(fileName);
