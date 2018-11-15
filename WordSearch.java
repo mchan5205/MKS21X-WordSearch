@@ -20,16 +20,19 @@ public class WordSearch{
         if (args.length > 4){
             Random y = new Random();
             WordSearch x = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], y.nextInt(), false);
-          }
-          if (args.length > 5){
-            WordSearch x = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
-          }
-          if (args.length > 6){
-            WordSearch x = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), true);
-          }
+            System.out.println(x);
+        }
+        if (args.length > 5){
+          WordSearch x = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
+          System.out.println(x);
+        }
+        if (args.length > 6){
+          WordSearch x = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), true);
+          System.out.println(x);
+        }
       }
       catch(FileNotFoundException e){
-        System.out.println("File not found")
+        System.out.println("File not found");
       }
   }
 
