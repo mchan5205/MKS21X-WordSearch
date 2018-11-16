@@ -17,24 +17,25 @@ public class WordSearch{
         System.out.println("randomSeed and answers is optional");
       }
       try{
-        if (args.length > 4){
-            Random y = new Random();
-            WordSearch x = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], y.nextInt(), false);
-            System.out.println(x);
+        if (args.length == 3){
+          Random y = new Random();
+          int row = Integer.parseInt(args[0]);
+          int col = Integer.parseInt(args[1]);
+          String filename = args[2];
+          WordSearch z = new WordSearch(row, col, filename, y.nextInt() % 5001 + 5000, false);
+          System.out.println(z);
         }
-        if (args.length > 5){
-          WordSearch x = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
-          System.out.println(x);
+        if (args.length == 4){
+          WordSearch z = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
         }
-        if (args.length > 6){
-          WordSearch x = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), true);
-          System.out.println(x);
+        if (args.length == 5){
+          WordSearch z = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), true);
         }
       }
       catch(FileNotFoundException e){
         System.out.println("File not found");
       }
-  }
+    }
 
     public WordSearch(int rows, int cols, String fileName, int randSeed, boolean answers) throws FileNotFoundException{
       data = new char[rows][cols];
@@ -112,16 +113,16 @@ public class WordSearch{
       return true;
     }
     private void addAllWords(){
-      String next = wordsToAdd.get(randgen.nextInt() % wordsToAdd.size());
+      String next = wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size()));
       int colInc = randgen.nextInt() % 2;
       int rowInc = randgen.nextInt() % 2;
       int i = 0;
       while (wordsToAdd.size() > 0){
-          if (addWord(next, randgen.nextInt() % data.length, randgen.nextInt() % data[0].length, rowInc, colInc)){
+          if (addWord(next, Math.abs(randgen.nextInt() % data.length), Math.abs(randgen.nextInt() % data[0].length), rowInc, colInc)){
             wordsAdded.add(next);
             wordsToAdd.remove(next);
             if (wordsToAdd.size() > 0){
-              next = wordsToAdd.get(randgen.nextInt() % wordsToAdd.size());
+              next = wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size()));
               colInc = randgen.nextInt() % 2;
               rowInc = randgen.nextInt() % 2;
               i = 0;
@@ -130,7 +131,7 @@ public class WordSearch{
           i += 1;
           if (i > 1000){
             if (wordsToAdd.size() > 0){
-              next = wordsToAdd.get(randgen.nextInt() % wordsToAdd.size());
+              next = wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size()));
               colInc = randgen.nextInt() % 2;
               rowInc = randgen.nextInt() % 2;
               i = 0;
