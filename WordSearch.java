@@ -100,7 +100,7 @@ public class WordSearch{
         for (int i = 0; i < data.length; i ++){
           for (int x = 0; x < data[0].length; x ++){
             if (! Character.isLetter(data[i][x])){
-              data[i][x] = (char)(Math.abs(randgen.nextInt()) % 26 + 'a');
+              data[i][x] = (char)(Math.abs(randgen.nextInt()) % 26 + 'A');
             }
           }
         }
@@ -139,7 +139,7 @@ public class WordSearch{
           newstr += ", ";
         }
       }
-      newstr += "(seed: " + seed + ")";
+      newstr += " (seed: " + seed + ")";
       return newstr;
     }
 

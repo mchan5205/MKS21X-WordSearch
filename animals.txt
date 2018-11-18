@@ -1,7 +1,10 @@
-bird
-giraffe
-monkey
-dog
-frog
-cow
-kangaroo
+BIRD
+GIRAFFE
+MONKEY
+DOG
+FROG
+COW
+KANGAROO
+BUFFALO
+ELEPHANT
+KOALA
