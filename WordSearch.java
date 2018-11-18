@@ -15,8 +15,12 @@ public class WordSearch{
       if (args.length > 3){
         System.out.println("use java WordSearch rows cols filename randomSeed answers");
         System.out.println("randomSeed and answers is optional");
+        System.exit(1);
       }
       try{
+        if (Integer.parseInt(args[0]) < 1 || Integer.parseInt(args[1]) < 1){
+          throw new IllegalArgumentException();
+        }
         if (args.length == 3){
           Random y = new Random();
           int row = Integer.parseInt(args[0]);
@@ -26,14 +30,50 @@ public class WordSearch{
           System.out.println(z);
         }
         if (args.length == 4){
-          WordSearch z = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), false);
+          if (Integer.parseInt(args[3]) > 10000 || Integer.parseInt(args[3]) < 0){
+            throw new IllegalArgumentException();
+          }
+          Random y = new Random();
+          int row = Integer.parseInt(args[0]);
+          int col = Integer.parseInt(args[1]);
+          String filename = args[2];
+          int ran = Integer.parseInt(args[3]);
+          WordSearch z = new WordSearch(row, col, filename, ran, false);
+          System.out.println(z);
         }
         if (args.length == 5){
-          WordSearch z = new WordSearch(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]), true);
+          if (Integer.parseInt(args[3]) > 10000 || Integer.parseInt(args[3]) < 0){
+            throw new IllegalArgumentException();
+          }
+          Random y = new Random();
+          int row = Integer.parseInt(args[0]);
+          int col = Integer.parseInt(args[1]);
+          String filename = args[2];
+          int ran = Integer.parseInt(args[3]);
+          WordSearch z;
+          if (! args[4].equals("key")){
+            z = new WordSearch(row, col, filename, ran, false);
+          }
+          else{
+            z = new WordSearch(row, col, filename, ran, true);
+          }
+          System.out.println(z);
         }
       }
       catch(FileNotFoundException e){
-        System.out.println("File not found");
+        System.out.println("use java WordSearch rows cols filename randomSeed answers");
+        System.out.println("randomSeed and answers is optional");
+        System.exit(1);
+      }
+      catch(NumberFormatException e){
+        System.out.println("use java WordSearch rows cols filename randomSeed answers");
+        System.out.println("randomSeed and answers is optional");
+        System.exit(1);
+      }
+      catch(IllegalArgumentException e){
+        System.out.println("use java WordSearch rows cols filename randomSeed answers");
+        System.out.println("randomSeed and answers is optional");
+        System.exit(1);
       }
     }
 
@@ -51,7 +91,8 @@ public class WordSearch{
         }
       }
       catch(FileNotFoundException e){
-        System.out.println("File not found: " + fileName);
+        System.out.println("use java WordSearch rows cols filename randomSeed answers");
+        System.out.println("randomSeed and answers is optional");
         System.exit(1);
       }
       randgen = new Random(randSeed);
@@ -60,7 +101,7 @@ public class WordSearch{
         for (int i = 0; i < data.length; i ++){
           for (int x = 0; x < data[0].length; x ++){
             if (! Character.isLetter(data[i][x])){
-              data[i][x] = (char)(randgen.nextInt() % 26 + 'a');
+              data[i][x] = (char)(Math.abs(randgen.nextInt()) % 26 + 'a');
             }
           }
         }
@@ -96,7 +137,7 @@ public class WordSearch{
     }
 
     private boolean addWord(String word, int r, int c, int rowIncrement, int colIncrement){
-      if (c + word.length() * colIncrement > data[0].length || c + word.length() * colIncrement < 0 && r + word.length() * rowIncrement > data.length || r + word.length() * rowIncrement < 0){
+      if (c + word.length() * colIncrement > data[0].length || c + word.length() * colIncrement < 0 || r + word.length() * rowIncrement > data.length || r + word.length() * rowIncrement < 0){
         return false;
       }
       if (rowIncrement == 0 && colIncrement == 0){
