@@ -12,9 +12,8 @@ public class WordSearch{
     private ArrayList<String> wordsAdded;
 
     public static void main(String[] args){
-      if (args.length > 3){
-        System.out.println("use java WordSearch rows cols filename randomSeed answers");
-        System.out.println("randomSeed and answers is optional");
+      if (args.length < 3){
+        System.out.println("use java WordSearch rows cols filename [randomSeed [answers]]");
         System.exit(1);
       }
       try{
@@ -61,18 +60,18 @@ public class WordSearch{
         }
       }
       catch(FileNotFoundException e){
-        System.out.println("use java WordSearch rows cols filename randomSeed answers");
+        System.out.println("use java WordSearch rows cols filename [randomSeed [answers]]");
         System.out.println("randomSeed and answers is optional");
         System.exit(1);
       }
       catch(NumberFormatException e){
-        System.out.println("use java WordSearch rows cols filename randomSeed answers");
-        System.out.println("randomSeed and answers is optional");
+        System.out.println("use java WordSearch rows cols filename [randomSeed [answers]]");
+        System.out.println("rows cols and randomSeed should be integers");
         System.exit(1);
       }
       catch(IllegalArgumentException e){
-        System.out.println("use java WordSearch rows cols filename randomSeed answers");
-        System.out.println("randomSeed and answers is optional");
+        System.out.println("use java WordSearch rows cols filename [randomSeed [answers]]");
+        System.out.println("rows and cols should be greater than 0 and randomSeed is greater than 0 and less than 10000");
         System.exit(1);
       }
     }
@@ -91,8 +90,8 @@ public class WordSearch{
         }
       }
       catch(FileNotFoundException e){
-        System.out.println("use java WordSearch rows cols filename randomSeed answers");
-        System.out.println("randomSeed and answers is optional");
+        System.out.println("use java WordSearch rows cols filename [randomSeed [answers]]");
+        System.out.println("file not found" + fileName);
         System.exit(1);
       }
       randgen = new Random(randSeed);
@@ -121,7 +120,15 @@ public class WordSearch{
       for (int i = 0; i < data.length; i ++){
         newstr += "|";
         for (int x = 0; x < data[i].length; x ++){
-          newstr += data[i][x];
+          if (Character.isLetter(data[i][x])){
+            newstr += data[i][x];
+          }
+          else{
+            newstr += " ";
+          }
+          if (x < data[i].length - 1){
+            newstr += " ";
+          }
         }
         newstr += "|\n";
       }
