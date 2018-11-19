@@ -60,18 +60,15 @@ public class WordSearch{
         }
       }
       catch(FileNotFoundException e){
-        System.out.println("use java WordSearch rows cols filename [randomSeed [answers]]");
-        System.out.println("randomSeed and answers is optional");
+        System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
         System.exit(1);
       }
       catch(NumberFormatException e){
-        System.out.println("use java WordSearch rows cols filename [randomSeed [answers]]");
-        System.out.println("rows cols and randomSeed should be integers");
+        System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
         System.exit(1);
       }
       catch(IllegalArgumentException e){
-        System.out.println("use java WordSearch rows cols filename [randomSeed [answers]]");
-        System.out.println("rows and cols should be greater than 0 and randomSeed is greater than 0 and less than 10000");
+        System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
         System.exit(1);
       }
     }
@@ -90,8 +87,7 @@ public class WordSearch{
         }
       }
       catch(FileNotFoundException e){
-        System.out.println("use java WordSearch rows cols filename [randomSeed [answers]]");
-        System.out.println("file not found" + fileName);
+        System.out.println("usage: java WordSearch [rows cols filename [randomSeed [answers]]]");
         System.exit(1);
       }
       randgen = new Random(randSeed);
