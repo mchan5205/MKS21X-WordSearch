@@ -161,6 +161,7 @@ public class WordSearch{
       int colInc = randgen.nextInt() % 2;
       int rowInc = randgen.nextInt() % 2;
       int i = 0;
+      int x = 0;
       while (wordsToAdd.size() > 0){
           if (addWord(next, Math.abs(randgen.nextInt() % data.length), Math.abs(randgen.nextInt() % data[0].length), rowInc, colInc)){
             wordsAdded.add(next);
@@ -170,16 +171,25 @@ public class WordSearch{
               colInc = randgen.nextInt() % 2;
               rowInc = randgen.nextInt() % 2;
               i = 0;
+              x = 0;
             }
           }
           i += 1;
-          if (i > 1000){
+          if (i > 1000 && x > 50){
+            wordsToAdd.remove(next);
             if (wordsToAdd.size() > 0){
               next = wordsToAdd.get(Math.abs(randgen.nextInt() % wordsToAdd.size()));
               colInc = randgen.nextInt() % 2;
               rowInc = randgen.nextInt() % 2;
               i = 0;
+              x = 0;
             }
+          }
+          if (i > 1000){
+            colInc = randgen.nextInt() % 2;
+            rowInc = randgen.nextInt() % 2;
+            x += 1;
+            i = 0;
           }
       }
     }
